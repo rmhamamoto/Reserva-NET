@@ -1,24 +1,32 @@
 package com.mycompany.reservanetsystem;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class SelecaoLocalFrame extends JFrame implements ActionListener {
-    private int larguraFrame = 370;
-    private int alturaFrame = 600;
+    private int larguraFrame = 500;
+    private int alturaFrame = 400;
 
     Container container = getContentPane();
-    JLabel lblUsuario = new JLabel("Usuário");
-    JLabel lblSenha = new JLabel("Senha");
+    JLabel lblBoasVindas = new JLabel("Seja bem-vindo(a)!");
+    JLabel lblMensagemAcao = new JLabel("Que tipo de locação deseja fazer?");
     ImageIcon iconeSistema = new ImageIcon("src/main/java/images/reservanet-icon-horizontal-login.png");
     JLabel lblIconeSistema = new JLabel(iconeSistema);
     JTextField txtUsuario = new JTextField();
     JPasswordField pwSenha = new JPasswordField();
-    JButton btnAcessar = new JButton("LOGIN");
-    JButton btnResetar = new JButton("RESET");
-    JCheckBox ckExibirSenha = new JCheckBox("Exibir senha");
+    JButton btnEscolherSala = new JButton("SALA");
+    JButton btnEscolherAuditorio = new JButton("AUDITÓRIO");
+    JButton btnVerHistorico = new JButton("HISTÓRICO DE LOCAÇÕES");
+
+    JMenuBar menuBar = new JMenuBar();
+    JMenu m1 = new JMenu("Arquivo");
+    JMenu m2 = new JMenu("Editar");
+    JMenuItem menuItem1 = new JMenuItem("Ver Histórico de Locações");
+    JMenuItem menuItem2 = new JMenuItem("Sair");
+    JMenuItem menuItem3 = new JMenuItem("Locação Anterior");
 
     public SelecaoLocalFrame()
     {
@@ -38,56 +46,60 @@ public class SelecaoLocalFrame extends JFrame implements ActionListener {
         //Dimensoes do Icone
         int larguraIcone = 250;
         int alturaIcone = 110;
-        int xIcone = this.centralizarIcone(this.larguraFrame,larguraIcone);
+        int xIcone = this.alinharIcone(this.larguraFrame,larguraIcone);
         int yIcone = (int)(alturaFrame * 0.06);
 
         lblIconeSistema.setBounds(xIcone,yIcone,larguraIcone,alturaIcone);
-        lblUsuario.setBounds(50, 190, 100, 30);
-        lblSenha.setBounds(50, 260, 100, 30);
-        txtUsuario.setBounds(150, 190, 150, 30);
-        pwSenha.setBounds(150, 260, 150, 30);
-        ckExibirSenha.setBounds(150, 290, 150, 30);
-        btnAcessar.setBounds(50, 350, 100, 30);
-        btnResetar.setBounds(200, 350, 100, 30);
+        lblBoasVindas.setBounds(50, 190, 100, 30);
+        lblMensagemAcao.setBounds(50, 210, 100, 30);
+        btnEscolherSala.setBounds(50, 260, 100, 30);
+        btnEscolherAuditorio.setBounds(200, 260, 100, 30);
+        btnVerHistorico.setBounds(50, 290, 250, 30);
 
     }
 
     public void addComponentesAoContainer()
     {
-        container.add(lblUsuario);
-        container.add(lblSenha);
+        menuBar.add(m1);
+        menuBar.add(m2);
+
+        m1.add(menuItem1);
+        m1.add(menuItem2);
+
+        m2.add(menuItem3);
+
+        container.add(menuBar);
         container.add(lblIconeSistema);
-        container.add(txtUsuario);
-        container.add(pwSenha);
-        container.add(ckExibirSenha);
-        container.add(btnAcessar);
-        container.add(btnResetar);
+        container.add(lblBoasVindas);
+        container.add(lblMensagemAcao);
+        container.add(btnEscolherSala);
+        container.add(btnEscolherAuditorio);
+        container.add(btnVerHistorico);
     }
 
     public void addActionEvent()
     {
-        btnAcessar.addActionListener(this);
-        btnResetar.addActionListener(this);
-        ckExibirSenha.addActionListener(this);
+        btnEscolherSala.addActionListener(this);
+        btnEscolherAuditorio.addActionListener(this);
     }
 
-    public void GUILogin(LoginFrame loginFrame)
+    public void GUISelecaoLocal()
     {
-        loginFrame.setTitle("Acesso ao Sistema");
-        loginFrame.setVisible(true);
-        loginFrame.setBounds(10, 10, this.larguraFrame, this.alturaFrame);
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loginFrame.setResizable(false);
+        this.setTitle("Acesso ao Sistema");
+        this.setVisible(true);
+        this.setBounds(10, 10, this.larguraFrame, this.alturaFrame);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
     }
 
-    public int centralizarIcone(int larguraFrame, int larguraImagem){
+    public int alinharIcone(int larguraFrame, int larguraImagem){
         return (int)((larguraFrame - larguraImagem)/2);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
-        if (e.getSource() == btnAcessar) {
+        //Para o botão SALA
+        if (e.getSource() == btnEscolherSala) {
             String usuario = txtUsuario.getText();
             String senha = pwSenha.getText();
             if (usuario.equalsIgnoreCase("lbarros") && senha.equalsIgnoreCase("adm111")) {
@@ -97,19 +109,12 @@ public class SelecaoLocalFrame extends JFrame implements ActionListener {
             }
 
         }
-        //Coding Part of RESET button
-        if (e.getSource() == btnResetar) {
+        //Para o botão AUDITÓRIO
+        if (e.getSource() == btnEscolherAuditorio) {
             txtUsuario.setText("");
             pwSenha.setText("");
         }
-        //Coding Part of ckExibirSenha JCheckBox
-        if (e.getSource() == ckExibirSenha) {
-            if (ckExibirSenha.isSelected()) {
-                pwSenha.setEchoChar((char) 0);
-            } else {
-                pwSenha.setEchoChar('*');
-            }
-        }
+
     }
 
 }

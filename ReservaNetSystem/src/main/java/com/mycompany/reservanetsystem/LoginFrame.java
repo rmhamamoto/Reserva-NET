@@ -78,6 +78,24 @@ public class LoginFrame extends JFrame implements ActionListener {
         ckExibirSenha.addActionListener(this);
     }
 
+
+    public int centralizarIcone(int larguraFrame, int larguraImagem){
+        return (int)((larguraFrame - larguraImagem)/2);
+    }
+
+    private boolean autenticarUsuario(String _usuario, String _senha){
+        for(Usuario objUsuario : Listas.listaUsuarios){
+            if(objUsuario.getLogin().equals(_usuario) && objUsuario.getSenha().equals(_senha)){
+                JOptionPane.showMessageDialog(this, "Login Successful");
+                this.hide();
+                SelecaoLocalFrame formSelecaoLocal = new SelecaoLocalFrame();
+                formSelecaoLocal.GUISelecaoLocal();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void GUILogin(LoginFrame loginFrame)
     {
         loginFrame.setTitle("Acesso ao Sistema");
@@ -87,29 +105,21 @@ public class LoginFrame extends JFrame implements ActionListener {
         loginFrame.setResizable(false);
     }
 
-    public int centralizarIcone(int larguraFrame, int larguraImagem){
-        return (int)((larguraFrame - larguraImagem)/2);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
+        //Para o botão LOGIN
         if (e.getSource() == btnAcessar) {
-            String usuario = txtUsuario.getText();
-            String senha = pwSenha.getText();
-            if (usuario.equalsIgnoreCase("lbarros") && senha.equalsIgnoreCase("adm111")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-            } else {
+            if(!this.autenticarUsuario(txtUsuario.getText(), pwSenha.getText())){
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
-
         }
-        //Coding Part of RESET button
+
+        //Para o botão RESET
         if (e.getSource() == btnResetar) {
             txtUsuario.setText("");
             pwSenha.setText("");
         }
-        //Coding Part of ckExibirSenha JCheckBox
+        //Para o ckExibirSenha
         if (e.getSource() == ckExibirSenha) {
             if (ckExibirSenha.isSelected()) {
                 pwSenha.setEchoChar((char) 0);

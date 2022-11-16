@@ -6,8 +6,11 @@ public class Usuario {
     private String login;
     private String senha;
 
-    public Usuario(){
-
+    public Usuario(String codigo, String nome, String login, String senha){
+        this.codigo = codigo;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
     }
 
     public String getCodigo() {
@@ -37,5 +40,6 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 }
 

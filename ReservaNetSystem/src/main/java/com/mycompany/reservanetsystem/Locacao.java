@@ -16,6 +16,33 @@ public class Locacao {
         this.recursosAdicionais = recursos;
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public List<String> getRecursosAdicionais() {
+        return recursosAdicionais;
+    }
+    public void setRecursosAdicionais(List<String> recursosAdicionais) {
+        this.recursosAdicionais = recursosAdicionais;
+    }
 
 }
 
